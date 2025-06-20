@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fias
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: false
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      maximum-pool-size: 10
+      minimum-idle: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 1000
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+        jdbc.lob.non_contextual_creation: true
+        jdbc.fetch_size: 1000
+        connection.provider_disables_autocommit: true
+        batch:
+          initialize-schema: never
+          job:
+            enabled: false
+
+  elasticsearch:
+    uris: http://localhost:9200
+    connection-timeout: 60s
+    socket-timeout: 300s
+    username: elastic
+    password: yourpassword
+
+jwt:
+  secret: dGhpc2lzYXZlcnl2ZXJ5dmVyeXNlY3VyZWtleWZvcmp3dDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTA=
+  expiration: 86400000
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.jdbc: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
+    com.diplom.agafonov.service: DEBUG
+    org.springframework.data.elasticsearch: DEBUG
+    org.springframework.security: DEBUG
+    com.diplom.agafonov.config: DEBUG
+
